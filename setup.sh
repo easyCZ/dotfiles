@@ -24,7 +24,7 @@ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/the
 
 # install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git /home/gitpod/.fzf
-/home/gitpod/.fzf/install
+/home/gitpod/.fzf/install --all --update-rc
 
 if [[ -d "/home/gitpod/.dotfiles" ]]; then
     # In gitpod, dotfiles are stored in this directory
