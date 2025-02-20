@@ -22,7 +22,12 @@ git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 
+# install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 if [[ -d "/home/gitpod/.dotfiles" ]]; then
     # In gitpod, dotfiles are stored in this directory
