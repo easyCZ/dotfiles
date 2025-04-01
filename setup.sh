@@ -44,6 +44,7 @@ if [ -f "$CREDENTIALS_FILE" ]; then
         echo "Installing Atuin..."
         curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
         source "$HOME/.atuin/bin/env"
+        echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
     fi
     
     # Read and parse JSON credentials
