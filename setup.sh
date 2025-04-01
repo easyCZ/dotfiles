@@ -34,3 +34,30 @@ if [[ -d "/home/gitpod/.dotfiles" ]]; then
 fi
 
 export SHELL=zsh
+
+CREDENTIALS_FILE="/usr/local/secrets/ATUIN_CREDENTIALS"
+
+# Check if credentials file exists
+if [ -f "$CREDENTIALS_FILE" ]; then
+    # Install atuin if not already installed
+    if ! command -v atuin &> /dev/null; then
+        echo "Installing Atuin..."
+        curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+        source "$HOME/.atuin/bin/env"
+    fi
+    
+    # Read and parse JSON credentials
+    USERNAME=$(jq -r '.user' "$CREDENTIALS_FILE")
+    PASSWORD=$(jq -r '.password' "$CREDENTIALS_FILE")
+    KEY=$(jq -r '.key' "$CREDENTIALS_FILE")
+    
+    # Check if all credentials were parsed successfully
+    if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ] || [ -z "$KEY" ]; then
+        echo "Error: Failed to parse credentials from JSON file"
+        exit 1
+    fi
+    
+    # Perform Atuin login
+    atuin login -u "$USERNAME" -p "$PASSWORD" -k "$KEY" 
+fi
+
