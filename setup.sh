@@ -10,6 +10,13 @@ if [[ -z "$ZSH_VERSION" ]]; then
 fi
 
 if [[ ! -d "~/.oh-my-zsh" ]]; then
+    if [ -d "/root/.oh_my_zsh" ]; then
+        echo "Found /root/.oh_my_zsh directory. Removing it..."
+        rm -rf /root/.oh_my_zsh
+        echo "Successfully removed /root/.oh_my_zsh"
+    else
+        echo "/root/.oh_my_zsh directory does not exist"
+    fi
     echo "Installing Oh My Zsh"
     
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
