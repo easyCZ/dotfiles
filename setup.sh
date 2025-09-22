@@ -9,27 +9,25 @@ if [[ -z "$ZSH_VERSION" ]]; then
     sudo apt install zsh
 fi
 
-if [[ ! -d "~/.oh-my-zsh" ]]; then
-    if [ -d "/root/.oh_my_zsh" ]; then
-        echo "Found /root/.oh_my_zsh directory. Removing it..."
-        rm -rf /root/.oh_my_zsh
-        echo "Successfully removed /root/.oh_my_zsh"
-    else
-        echo "/root/.oh_my_zsh directory does not exist"
-    fi
-
-    if [ -d "/root/.zshrc" ]; then
-        echo "Found /root/.zshrc. Removing it..."
-        rm -rf /root/.zshrc
-        echo "Successfully removed /root/.zshrc"
-    else
-        echo "/root/.zshrc does not exist"
-    fi
-    
-    echo "Installing Oh My Zsh"
-    
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+if [ -d "/root/.oh_my_zsh" ]; then
+    echo "Found /root/.oh_my_zsh directory. Removing it..."
+    rm -rf /root/.oh_my_zsh
+    echo "Successfully removed /root/.oh_my_zsh"
+else
+    echo "/root/.oh_my_zsh directory does not exist"
 fi
+
+if [ -f "/root/.zshrc" ]; then
+    echo "Found /root/.zshrc. Removing it..."
+    rm -rf /root/.zshrc
+    echo "Successfully removed /root/.zshrc"
+else
+    echo "/root/.zshrc does not exist"
+fi
+
+echo "Installing Oh My Zsh"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
 
 # Install spaceship
 # https://github.com/spaceship-prompt/spaceship-prompt
